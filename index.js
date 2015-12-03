@@ -66,6 +66,22 @@ class Model {
     });
   }
 
+  getMany(keys) {
+    return new Promise((resolve, reject) => {
+      this._dataset.get(keys, (err, retrievedEntities) => {
+        if (err) {
+          return reject(err);
+        }
+
+        resolve(retrievedEntities.map(e => {
+          const entity = expandMetadata(e.data);
+          entity.id = _.last(e.key.path);
+          return entity;
+        }));
+      });
+    });
+  }
+
   insert(key, entity) {
     const date = new Date();
     return save(this._dataset, key, Object.assign({_metadata: {created: date, updated: date}}, entity), 'insert');

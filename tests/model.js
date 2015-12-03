@@ -177,6 +177,49 @@ describe('GCloud Datastore Model', function () {
         }));
   });
 
+  describe('getMany', () => {
+    let returnedModels;
+    let insertedModels;
+    const key2 = dataset.key(['Kind', 'other']);
+
+    beforeEach(() =>
+      Promise.all([
+        TestModel.insert(key, model),
+        TestModel.insert(key2, model)
+      ])
+      .then(m => insertedModels = m)
+      .then(() => TestModel.getMany([key, key2]))
+      .then(m => returnedModels = m));
+
+    it('returns the models with their ids', () => {
+      expect(_.pluck(returnedModels, 'id')).to.deep.equal(['myid', 'other']);
+    });
+
+    it('returns the models with created dates', () => {
+      returnedModels.forEach((model, index) => {
+        expect(model).to.have.property('_metadata');
+        expect(model._metadata.created).to.deep.equal(insertedModels[index]._metadata.created);
+      });
+    });
+
+    it('returns the models with updated dates', () => {
+      returnedModels.forEach((model, index) => {
+        expect(model).to.have.property('_metadata');
+        expect(model._metadata.updated).to.deep.equal(insertedModels[index]._metadata.updated);
+      });
+    });
+
+    it('returns the model\'s attributes', () => {
+      returnedModels.forEach((model, index) => {
+        expect(_.omit(model, generatedFields)).to.deep.equal(_.omit(insertedModels[index], generatedFields));
+      });
+    });
+
+    it('ignores non existant keys', () =>
+      TestModel.getMany([key, dataset.key(['Kind', 'notexists'])])
+        .then(models => expect(models).to.have.length(1)));
+  });
+
   describe('find', () => {
     const query = dataset.createQuery('Kind').order('field');
     let foundModels;
