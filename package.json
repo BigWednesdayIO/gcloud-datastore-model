@@ -1,0 +1,45 @@
+{
+  "name": "gcloud-datastore-model",
+  "version": "0.0.1",
+  "description": "A wrapper around gcloud dataset for storing, retrieving and querying entities",
+  "main": "index.js",
+  "engines": {
+    "node": "^4"
+  },
+  "scripts": {
+    "test": "xo index.js tests/** && mocha tests",
+    "watch": "chokidar index.js tests/** -c 'npm test'",
+    "retire": "retire"
+  },
+  "xo": {
+    "envs": [
+      "node",
+      "mocha"
+    ],
+    "space": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BigWednesdayIO/gcloud-datastore-model.git"
+  },
+  "author": {
+    "name": "Big Wednesday IO",
+    "email": "info@bigwednesday.io"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BigWednesdayIO/gcloud-datastore-model/issues"
+  },
+  "homepage": "https://github.com/BigWednesdayIO/gcloud-datastore-model#readme",
+  "peerDependencies": {
+    "gcloud": "^0.25.1"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "chokidar-cli": "^1.2.0",
+    "mocha": "^2.3.4",
+    "retire": "^1.1.2",
+    "xo": "^0.11.2",
+    "gcloud": "^0.25.1"
+  }
+}
