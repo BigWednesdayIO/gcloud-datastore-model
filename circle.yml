@@ -1,0 +1,24 @@
+machine:
+  services:
+    - docker
+  python:
+    version: 2.7.3
+  environment:
+    DATASTORE_HOST: http://localhost:8080
+
+dependencies:
+  cache_directories:
+    - ~/docker
+  override:
+    - sudo pip install -U docker-compose
+    - docker-compose run -d -p 8080:8080 gclouddatastore
+    - npm install
+
+test:
+  override:
+    - npm run retire
+    - nvm install 4.0 && npm rebuild && npm test
+    - nvm install 4.1 && npm rebuild && npm test
+    - nvm install 4.2 && npm rebuild && npm test
+    - nvm install 5.0 && npm rebuild && npm test
+    - nvm install 5.1 && npm rebuild && npm test
