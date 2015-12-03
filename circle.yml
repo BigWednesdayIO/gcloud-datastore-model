@@ -5,6 +5,7 @@ machine:
     version: 2.7.3
   environment:
     DATASTORE_HOST: http://localhost:8080
+    CXX: g++-4.8
 
 dependencies:
   cache_directories:
