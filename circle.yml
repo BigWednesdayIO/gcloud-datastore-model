@@ -12,6 +12,10 @@ dependencies:
     - ~/docker
   override:
     - sudo pip install -U docker-compose
+    - if [[ -e ~/docker/gcd.tar ]]; then docker load -i ~/docker/gcd.tar; fi
+    - docker pull bigwednesdayio/gcd-local:v1beta2-rev1-3.0.2
+    - mkdir -p ~/docker
+    - docker save bigwednesdayio/gcd-local:v1beta2-rev1-3.0.2 > ~/docker/gcd.tar
     - docker-compose run -d -p 8080:8080 gclouddatastore
     - npm install
 
