@@ -16,7 +16,11 @@
       "node",
       "mocha"
     ],
-    "space": true
+    "space": true,
+    "rules": {
+      "camelcase": 0,
+      "no-unused-expressions": 0
+    }
   },
   "repository": {
     "type": "git",
@@ -37,9 +41,13 @@
   "devDependencies": {
     "chai": "^3.4.1",
     "chokidar-cli": "^1.2.0",
+    "gcloud": "^0.25.1",
     "mocha": "^2.3.4",
     "retire": "^1.1.2",
-    "xo": "^0.11.2",
-    "gcloud": "^0.25.1"
+    "sinon": "^1.17.2",
+    "xo": "^0.11.2"
+  },
+  "dependencies": {
+    "lodash": "^3.10.1"
   }
 }
