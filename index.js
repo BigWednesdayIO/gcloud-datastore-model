@@ -113,17 +113,20 @@ class Model {
   }
 
   delete(key) {
-    return this.get(key)
-      .then(() => new Promise((resolve, reject) => {
-        this._dataset.delete(key, err => {
-          if (err) {
-            console.log(err);
-            return reject(err);
-          }
+    return new Promise((resolve, reject) => {
+      this._dataset.delete(key, (err, result) => {
+        if (err) {
+          console.log(err);
+          return reject(err);
+        }
 
-          resolve();
-        });
-      }));
+        if (result.mutation_result.index_updates === 0) {
+          return reject(new EntityNotFoundError());
+        }
+
+        resolve();
+      });
+    });
   }
 }
 
