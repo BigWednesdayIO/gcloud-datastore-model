@@ -6,8 +6,6 @@ const sinon = require('sinon');
 
 const dataset = require('./test_dataset');
 
-const Model = require('../');
-
 describe('GCloud Datastore Model', function () {
   const key = dataset.key(['Kind', 'myid']);
   const model = {one: 'two', two: 'three'};
@@ -25,7 +23,7 @@ describe('GCloud Datastore Model', function () {
     runQuerySpy = sandbox.spy(dataset, 'runQuery');
     deleteSpy = sandbox.spy(dataset, 'delete');
 
-    TestModel = new Model(dataset);
+    TestModel = require('../')(dataset);
   });
 
   afterEach(() => sandbox.restore());

@@ -130,4 +130,4 @@ class Model {
   }
 }
 
-module.exports = Model;
+module.exports = dataset => new Model(dataset);
