@@ -1,4 +1,6 @@
 # gcloud-datastore-model
+[![Circle CI](https://circleci.com/gh/BigWednesdayIO/gcloud-datastore-model/tree/master.svg?style=svg&circle-token=14876e77d4fbc2fc78348ae593151218549cb9cb)](https://circleci.com/gh/BigWednesdayIO/gcloud-datastore-model/tree/master)
+
 A wrapper around the [gcloud-node](https://github.com/GoogleCloudPlatform/gcloud-node) dataset functions for storing, retrieving and basic querying of Google Cloud Datastore entities.
 
 ### Features

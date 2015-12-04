@@ -1,5 +1,5 @@
 gclouddatastore:
-  image: bigwednesdayio/gcd-local:v1beta2-rev1-3.0.2
+  image: risaacson/gcd-local:v1beta2-rev1-3.0.2
   environment:
     - PROJ_ID=test
     - CONSISTENCY=1.0
