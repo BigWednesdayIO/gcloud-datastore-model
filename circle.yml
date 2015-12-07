@@ -1,0 +1,29 @@
+machine:
+  services:
+    - docker
+  python:
+    version: 2.7.3
+  environment:
+    DATASTORE_HOST: http://localhost:8080
+    CXX: g++-4.8
+
+dependencies:
+  cache_directories:
+    - ~/docker
+  override:
+    - sudo pip install -U docker-compose
+    - if [[ -e ~/docker/gcd.tar ]]; then docker load -i ~/docker/gcd.tar; fi
+    - docker pull bigwednesdayio/gcd-local:v1beta2-rev1-3.0.2
+    - mkdir -p ~/docker
+    - docker save bigwednesdayio/gcd-local:v1beta2-rev1-3.0.2 > ~/docker/gcd.tar
+    - docker-compose run -d -p 8080:8080 gclouddatastore
+    - npm install
+
+test:
+  override:
+    - npm run retire
+    - nvm install 4.0 && npm rebuild && npm test
+    - nvm install 4.1 && npm rebuild && npm test
+    - nvm install 4.2 && npm rebuild && npm test
+    - nvm install 5.0 && npm rebuild && npm test
+    - nvm install 5.1 && npm rebuild && npm test

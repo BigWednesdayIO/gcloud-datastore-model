@@ -1,0 +1,18 @@
+gclouddatastore:
+  image: risaacson/gcd-local:v1beta2-rev1-3.0.2
+  environment:
+    - PROJ_ID=test
+    - CONSISTENCY=1.0
+  ports:
+    - '8080'
+
+dev:
+  image: node:5.1.0
+  volumes:
+    - .:/usr/local/gcloud-datastore-model
+  working_dir: /usr/local/gcloud-datastore-model
+  links:
+    - gclouddatastore
+  environment:
+    - DATASTORE_HOST=http://gclouddatastore:8080
+  command: bash -c "npm install && SHELL=/bin/bash npm run watch"
