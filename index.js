@@ -1,5 +1,7 @@
 'use strict';
 
+const events = require('events');
+
 const _ = require('lodash');
 
 class EntityNotFoundError extends Error {
@@ -43,8 +45,9 @@ const save = (dataset, key, entity, method) => {
   });
 };
 
-class Model {
+class Model extends events.EventEmitter {
   constructor(dataset) {
+    super();
     this._dataset = dataset;
   }
 
@@ -84,7 +87,11 @@ class Model {
 
   insert(key, entity) {
     const date = new Date();
-    return save(this._dataset, key, Object.assign({_metadata: {created: date, updated: date}}, entity), 'insert');
+    return save(this._dataset, key, Object.assign({_metadata: {created: date, updated: date}}, entity), 'insert')
+      .then(model => {
+        this.emit('inserted', model);
+        return model;
+      });
   }
 
   update(key, entity) {
