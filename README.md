@@ -8,6 +8,7 @@ A wrapper around the [gcloud-node](https://github.com/GoogleCloudPlatform/gcloud
 * Created and updated dates stored and returned in _metadata properties
 * Assigns an id to the model based on the datastore key
 * Returns promises
+* Raises events
 
 ### Install
 
@@ -25,6 +26,8 @@ const DatastoreModel = require('gcloud-datastore-model')(dataset);
 
 DatastoreModel.insert(dataset.key(['Kind', 'myid']), {test: 'value'})
   .then(model => console.log);
+
+DatastoreModel.on('inserted', model => console.log);
 
 /* model:
 {
@@ -47,11 +50,18 @@ All functions return promises.
 * get(key) - retrieves a model from the datastore. Errors with an EntityNotFoundError if the key does not exist.
 * getMany(keys) - retrieves multiple models from the datastore. Ignores keys that do not exist.
 * delete(key) - deletes a model from the datastore. Errors with an EntityNotFoundError if the key does not exist.
-* find(query) - executes a datastore query .
+* find(query) - executes a datastore query.
 
 Parameters:
+
 * key - A gcloud-node dataset key object e.g. dataset.key(['Person', '1'])
 * model - Attributes to persist to datastore e.g. {firstname: 'John', lastname: 'Smith', age: 30}
+
+Events:
+
+* on('inserted', fn) - fn receives the inserted model
+* on('updated', fn) - fn receives the updated model
+* on('deleted', fn) - fn receives the key for the deleted model
 
 ### Development
 
