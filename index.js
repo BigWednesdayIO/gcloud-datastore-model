@@ -127,7 +127,6 @@ class Model extends events.EventEmitter {
     return new Promise((resolve, reject) => {
       this._dataset.delete(key, (err, result) => {
         if (err) {
-          console.log(err);
           return reject(err);
         }
 
@@ -137,6 +136,10 @@ class Model extends events.EventEmitter {
 
         resolve();
       });
+    })
+    .then(() => {
+      this.emit('deleted', key);
+      return;
     });
   }
 }
