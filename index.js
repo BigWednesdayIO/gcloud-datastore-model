@@ -100,6 +100,10 @@ class Model extends events.EventEmitter {
         const updatedEntity = Object.assign({_metadata: currentEntity._metadata}, entity);
         updatedEntity._metadata.updated = new Date();
         return save(this._dataset, key, updatedEntity, 'update');
+      })
+      .then(model => {
+        this.emit('updated', model);
+        return model;
       });
   }
 
