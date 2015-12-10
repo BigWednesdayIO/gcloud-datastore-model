@@ -59,9 +59,9 @@ Parameters:
 
 Events:
 
-* on('inserted', fn) - fn receives the inserted model
-* on('updated', fn) - fn receives the updated model
-* on('deleted', fn) - fn receives the key for the deleted model
+* on('inserted', (model, key) => {}) - emitted when a new model is successfully inserted
+* on('updated', (model, key) => {}) - emitted when an existing model is successfully updated
+* on('deleted', key => {}) - emitted when an existing model is successfully deleted
 
 ### Development
 
