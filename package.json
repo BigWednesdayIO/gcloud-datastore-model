@@ -1,6 +1,6 @@
 {
   "name": "gcloud-datastore-model",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A wrapper around gcloud dataset for storing, retrieving and querying entities",
   "main": "index.js",
   "engines": {
