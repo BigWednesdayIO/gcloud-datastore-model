@@ -41,15 +41,25 @@ describe('GCloud Datastore Model Events', () => {
     });
 
     describe('when insert succeeds', () => {
+      const key = dataset.key('Thing', '1');
+
       beforeEach(() =>
-        TestModel.insert(dataset.key('Thing', '1'), {test: 'value'}).then(model => insertedModel = model));
+        TestModel.insert(key, {test: 'value'}).then(model => insertedModel = model));
 
       it('raises the event', () => {
         sinon.assert.calledOnce(onInsertedEventSpy);
       });
 
-      it('sends the model as the only event argument', () => {
-        expect(onInsertedEventSpy.firstCall.args).to.deep.equal([insertedModel]);
+      it('sends two arguments', () => {
+        expect(onInsertedEventSpy.firstCall.args).to.have.length(2);
+      });
+
+      it('sends the model as the first event argument', () => {
+        expect(onInsertedEventSpy.firstCall.args[0]).to.deep.equal(insertedModel);
+      });
+
+      it('sends the key as the second event argument', () => {
+        expect(onInsertedEventSpy.firstCall.args[1]).to.deep.equal(key);
       });
     });
 
@@ -74,15 +84,25 @@ describe('GCloud Datastore Model Events', () => {
     });
 
     describe('when update succeeds', () => {
+      const key = dataset.key('Thing', '1');
+
       beforeEach(() =>
-        TestModel.update(dataset.key('Thing', '1'), {test: 'value'}).then(model => updatedModel = model));
+        TestModel.update(key, {test: 'value'}).then(model => updatedModel = model));
 
       it('raises the event', () => {
         sinon.assert.calledOnce(onUpdatedEventSpy);
       });
 
-      it('sends the model as the only event argument', () => {
-        expect(onUpdatedEventSpy.firstCall.args).to.deep.equal([updatedModel]);
+      it('sends two arguments', () => {
+        expect(onUpdatedEventSpy.firstCall.args).to.have.length(2);
+      });
+
+      it('sends the model as the first event argument', () => {
+        expect(onUpdatedEventSpy.firstCall.args[0]).to.deep.equal(updatedModel);
+      });
+
+      it('sends the key as the second event argument', () => {
+        expect(onUpdatedEventSpy.firstCall.args[1]).to.deep.equal(key);
       });
     });
 
