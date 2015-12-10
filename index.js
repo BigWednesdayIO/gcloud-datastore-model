@@ -89,7 +89,7 @@ class Model extends events.EventEmitter {
     const date = new Date();
     return save(this._dataset, key, Object.assign({_metadata: {created: date, updated: date}}, entity), 'insert')
       .then(model => {
-        this.emit('inserted', model);
+        this.emit('inserted', model, key);
         return model;
       });
   }
@@ -102,7 +102,7 @@ class Model extends events.EventEmitter {
         return save(this._dataset, key, updatedEntity, 'update');
       })
       .then(model => {
-        this.emit('updated', model);
+        this.emit('updated', model, key);
         return model;
       });
   }
