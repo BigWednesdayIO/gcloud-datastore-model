@@ -26,6 +26,12 @@
     "type": "git",
     "url": "git+https://github.com/BigWednesdayIO/gcloud-datastore-model.git"
   },
+  "keywords": [
+    "gcloud",
+    "google",
+    "datastore",
+    "gcd"
+  ],
   "author": {
     "name": "Big Wednesday IO",
     "email": "info@bigwednesday.io"
