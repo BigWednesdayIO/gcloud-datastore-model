@@ -11,7 +11,6 @@ dependencies:
   cache_directories:
     - ~/docker
   override:
-    - sudo pip install -U docker-compose
     - if [[ -e ~/docker/gcd.tar ]]; then docker load -i ~/docker/gcd.tar; fi
     - docker pull bigwednesdayio/gcd-local:v1beta2-rev1-3.0.2
     - mkdir -p ~/docker
