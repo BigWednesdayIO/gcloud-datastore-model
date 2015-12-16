@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/BigWednesdayIO/gcloud-datastore-model#readme",
   "peerDependencies": {
-    "gcloud": "^0.25.1"
+    "gcloud": ">=0.25.1 <=0.26.1"
   },
   "devDependencies": {
     "chai": "^3.4.1",
