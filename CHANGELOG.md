@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.3.0] - 2015-12-31
+- Return non-enumerable _key property in model for query results
+
 ## [1.2.0] - 2015-12-10
 - Emit the datastore key in inserted and updated events as well as the model
 
