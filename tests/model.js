@@ -9,7 +9,7 @@ const dataset = require('./test_dataset');
 describe('GCloud Datastore Model', function () {
   const key = dataset.key(['Kind', 'myid']);
   const model = {one: 'two', two: 'three'};
-  const generatedFields = ['_metadata', 'id'];
+  const generatedFields = ['_metadata', 'id', '_key'];
 
   let sandbox;
   let saveSpy;
@@ -261,6 +261,16 @@ describe('GCloud Datastore Model', function () {
       foundModels.forEach((model, index) => {
         expect(_.omit(model, generatedFields)).to.deep.equal({field: index + 1, other: 3 - index});
       });
+    });
+
+    it('returns the datastore key as _key', () => {
+      foundModels.forEach((model, index) => {
+        expect(model._key).to.deep.equal(dataset.key(['Kind', (index + 1).toString()]));
+      });
+    });
+
+    it('makes _key non-enumerable', () => {
+      foundModels.forEach(m => expect(m.propertyIsEnumerable('_key')).to.equal(false, '_key property should not be enumerable'));
     });
   });
 
