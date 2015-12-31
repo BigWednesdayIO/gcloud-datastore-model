@@ -117,6 +117,9 @@ class Model extends events.EventEmitter {
         resolve(results.map(r => {
           const entity = expandMetadata(r.data);
           entity.id = _.last(r.key.path);
+
+          Object.defineProperty(entity, '_key', {value: r.key});
+
           return entity;
         }));
       });
