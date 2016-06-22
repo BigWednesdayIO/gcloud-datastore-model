@@ -35,7 +35,7 @@ DatastoreModel.on('inserted', model => console.log);
   test: 'value',
   _metadata: {
     created: Thu Dec 03 2015 16:04:05 GMT+0000 (GMT)
-    uppdated: Thu Dec 03 2015 16:04:05 GMT+0000 (GMT)
+    updated: Thu Dec 03 2015 16:04:05 GMT+0000 (GMT)
   }
 }
 */
